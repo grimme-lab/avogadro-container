@@ -13,6 +13,9 @@ on:
   # Run tests for any PRs.
   pull_request:
 
+  # Trigger manually
+  workflow_dispatch:
+
 env:
   IMAGE_NAME: avogadro
 
@@ -41,7 +44,7 @@ jobs:
     needs: test
 
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
 
     steps:
       - uses: actions/checkout@v2
